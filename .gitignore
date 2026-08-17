@@ -1,0 +1,8 @@
+/.vscode
+/dataset
+/processed
+__pycache__
+*.db
+.env
+*.nbconvert.ipynb
+*.pdf

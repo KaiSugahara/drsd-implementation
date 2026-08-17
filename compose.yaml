@@ -1,0 +1,21 @@
+services:
+  dev:
+    container_name: drsd-dev
+    build:
+      context: .
+      dockerfile: .devcontainer/cuda13/Dockerfile
+    env_file:
+      - path: .env
+        required: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    tty: true
+    stdin_open: true

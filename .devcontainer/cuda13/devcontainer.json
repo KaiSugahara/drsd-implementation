@@ -1,0 +1,52 @@
+{
+    "name": "drsd-dev",
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "context": "../.."
+    },
+    "runArgs": [
+        "--gpus",
+        "all",
+        "--env-file",
+        ".env"
+    ],
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
+    "workspaceFolder": "/workspace",
+    "postAttachCommand": "poetry run mlflow server --host 127.0.0.1 --port 8080",
+    "updateRemoteUserUID": true,
+    "remoteEnv": {},
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "ms-toolsai.jupyter",
+                "njpwerner.autodocstring"
+            ],
+            "settings": {
+                "python.analysis.typeCheckingMode": "basic",
+                "python.analysis.autoImportCompletions": true,
+                "python.analysis.extraPaths": [
+                    "/workspace"
+                ],
+                "notebook.formatOnSave.enabled": true,
+                "notebook.codeActionsOnSave": {
+                    "notebook.source.fixAll": "explicit",
+                    "notebook.source.organizeImports": "explicit"
+                },
+                "notebook.lineNumbers": "on",
+                "[python]": {
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll": "explicit",
+                        "source.organizeImports": "explicit"
+                    },
+                    "editor.defaultFormatter": "charliermarsh.ruff"
+                },
+                "files.insertFinalNewline": true
+            }
+        }
+    }
+}
